@@ -4,6 +4,8 @@ import com.microsoft.playwright.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
+import java.nio.file.Paths;
+
 public class BaseTest {
 
     protected Playwright playwright;
@@ -16,18 +18,31 @@ public class BaseTest {
 
         playwright = Playwright.create();
 
-        boolean isCI = System.getenv("CI") != null;
-
         browser = playwright.chromium().launch(
                 new BrowserType.LaunchOptions().setHeadless(true)
         );
 
         context = browser.newContext();
         page = context.newPage();
+
+        // ← Add these: CI runners are slower than local machines
+        page.setDefaultTimeout(60000);
+        page.setDefaultNavigationTimeout(60000);
     }
 
     @AfterEach
     public void tearDown() {
+
+        // ← Add this: screenshot helps debug what CI actually saw
+        try {
+            if (page != null) {
+                page.screenshot(new Page.ScreenshotOptions()
+                        .setPath(Paths.get("target/screenshot-" + System.currentTimeMillis() + ".png"))
+                        .setFullPage(true));
+            }
+        } catch (Exception e) {
+            System.out.println("Screenshot failed: " + e.getMessage());
+        }
 
         try {
             if (context != null) context.close();
