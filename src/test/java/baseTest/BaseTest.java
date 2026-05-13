@@ -16,10 +16,11 @@ public class BaseTest {
 
         playwright = Playwright.create();
 
+        boolean isCI = System.getenv("CI") != null;
+
         browser = playwright.chromium().launch(
                 new BrowserType.LaunchOptions()
-                        .setHeadless(false)
-                        .setSlowMo(500)
+                        .setHeadless(isCI)   // true in CI, false locally
         );
 
         context = browser.newContext();
