@@ -35,6 +35,7 @@ public class LoginTest extends BaseTest {
         login.clickLogin();
 
         System.out.println("Test completed");
+        System.out.println("GitHub Actions Running");
     }
 
     @AfterAll
