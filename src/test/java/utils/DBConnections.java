@@ -10,9 +10,9 @@ public class DBConnections {
 
     public static void connect() {
         try {
-            String url = "jdbc:oracle:thin:@//172.18.125.129:1521/trfdv";
+            String url = "jdbc:oracle:thin:@//xxx.xx.xxx.xxx:xxxx/trfdv";
             String user = "Traffic";
-            String password = "traffic2";
+            String password = "xxxx";
 
             connection = DriverManager.getConnection(url, user, password);
 

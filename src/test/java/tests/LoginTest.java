@@ -11,7 +11,7 @@ import utils.VehicleQueries;
 public class LoginTest extends BaseTest {
 
 
-    @BeforeAll
+  /*  @BeforeAll
     static void runDataBaseQueries() {
         DBConnections.connect();
 
@@ -21,7 +21,7 @@ public class LoginTest extends BaseTest {
         );
 
         System.out.println(result);
-    }
+    }*/
 
     @Test
     void loginTest() {
@@ -38,8 +38,8 @@ public class LoginTest extends BaseTest {
         System.out.println("GitHub Actions Running");
     }
 
-    @AfterAll
+    /*@AfterAll
     static void tearDownAll() {
         DBConnections.close();
-    }
+    }*/
 }
