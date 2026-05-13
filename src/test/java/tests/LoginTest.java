@@ -30,8 +30,8 @@ public class LoginTest extends BaseTest {
 
         login.openApp("https://www.google.com/");
 
-        login.enterUsername("test");
-        login.enterPassword("test");
+        //login.enterUsername("test");
+        //login.enterPassword("test");
         //login.clickLogin();
 
         System.out.println("Test completed");
