@@ -14,13 +14,13 @@ jobs:
       - name: Checkout Project
         uses: actions/checkout@v4
 
-      - name: Install Java
+      - name: Setup Java
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Install Node.js
+      - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: '20'
@@ -29,7 +29,7 @@ jobs:
         run: mvn clean install
 
       - name: Install Playwright Browsers
-        run: npx playwright install
+        run: mvn exec:java -e -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install"
 
       - name: Run Tests
         run: mvn test
