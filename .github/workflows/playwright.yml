@@ -26,10 +26,17 @@ jobs:
           node-version: '20'
 
       - name: Install Maven Dependencies
-        run: mvn clean install
+        run: mvn clean install -DskipTests   # ← skip tests here
 
       - name: Install Playwright Browsers
-        run: mvn exec:java -e -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install"
+        run: mvn exec:java -e -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install --with-deps"
 
       - name: Run Tests
         run: mvn test
+
+      - name: Upload Surefire Reports      # ← add this to see failures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: surefire-reports
+          path: target/surefire-reports/
