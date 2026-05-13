@@ -14,20 +14,16 @@ public class BaseTest {
     protected Page page;
 
     @BeforeEach
-    public void setUp() {
-
+    void setUp() {
         playwright = Playwright.create();
 
         browser = playwright.chromium().launch(
-                new BrowserType.LaunchOptions().setHeadless(true)
+                new BrowserType.LaunchOptions()
+                        .setHeadless(System.getenv("CI") != null)
         );
 
         context = browser.newContext();
         page = context.newPage();
-
-        // ← Add these: CI runners are slower than local machines
-        page.setDefaultTimeout(60000);
-        page.setDefaultNavigationTimeout(60000);
     }
 
     @AfterEach
