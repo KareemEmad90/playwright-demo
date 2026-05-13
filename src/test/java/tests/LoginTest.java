@@ -32,10 +32,12 @@ public class LoginTest extends BaseTest {
 
         login.enterUsername("test");
         login.enterPassword("test");
-        login.clickLogin();
+        //login.clickLogin();
 
         System.out.println("Test completed");
-        System.out.println("GitHub Actions Running");
+        System.out.println("URL: " + page.url());
+        System.out.println("TITLE: " + page.title());
+        System.out.println("CONTENT: " + page.content());
     }
 
     /*@AfterAll

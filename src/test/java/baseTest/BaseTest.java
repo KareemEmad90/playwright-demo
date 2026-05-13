@@ -32,34 +32,20 @@ public class BaseTest {
 
     @AfterEach
     public void tearDown() {
-
-        // ← Add this: screenshot helps debug what CI actually saw
-        try {
-            if (page != null) {
-                page.screenshot(new Page.ScreenshotOptions()
-                        .setPath(Paths.get("target/screenshot-" + System.currentTimeMillis() + ".png"))
-                        .setFullPage(true));
-            }
-        } catch (Exception e) {
-            System.out.println("Screenshot failed: " + e.getMessage());
-        }
-
         try {
             if (context != null) context.close();
-        } catch (Exception e) {
-            System.out.println("Context already closed");
-        }
+        } catch (Exception ignored) {}
 
         try {
-            if (browser != null) browser.close();
-        } catch (Exception e) {
-            System.out.println("Browser already closed");
-        }
+            if (browser != null && browser.isConnected()) {
+                browser.close();
+            }
+        } catch (Exception ignored) {}
 
         try {
-            if (playwright != null) playwright.close();
-        } catch (Exception e) {
-            System.out.println("Playwright already closed");
-        }
+            if (playwright != null) {
+                playwright.close();
+            }
+        } catch (Exception ignored) {}
     }
 }
