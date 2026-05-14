@@ -4,6 +4,8 @@ import com.microsoft.playwright.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
+import java.nio.file.Paths;
+
 public class BaseTest {
 
     protected Playwright playwright;
@@ -12,13 +14,12 @@ public class BaseTest {
     protected Page page;
 
     @BeforeEach
-    public void setUp() {
-
+    void setUp() {
         playwright = Playwright.create();
 
         browser = playwright.chromium().launch(
                 new BrowserType.LaunchOptions()
-                        .setHeadless(false)
+                        .setHeadless(System.getenv("CI") != null)
         );
 
         context = browser.newContext();
@@ -27,23 +28,20 @@ public class BaseTest {
 
     @AfterEach
     public void tearDown() {
-
         try {
             if (context != null) context.close();
-        } catch (Exception e) {
-            System.out.println("Context already closed");
-        }
+        } catch (Exception ignored) {}
 
         try {
-            if (browser != null) browser.close();
-        } catch (Exception e) {
-            System.out.println("Browser already closed");
-        }
+            if (browser != null && browser.isConnected()) {
+                browser.close();
+            }
+        } catch (Exception ignored) {}
 
         try {
-            if (playwright != null) playwright.close();
-        } catch (Exception e) {
-            System.out.println("Playwright already closed");
-        }
+            if (playwright != null) {
+                playwright.close();
+            }
+        } catch (Exception ignored) {}
     }
 }
