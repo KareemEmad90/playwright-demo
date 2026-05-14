@@ -24,9 +24,10 @@ public class OpenGit extends BaseTest {
     }*/
 
     @Test
-    void test2() {
+    void test() {
         page.navigate("https://github.com");
         page.waitForTimeout(10000);
+        System.out.println("Test completed2");
     }
 
 

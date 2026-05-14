@@ -27,6 +27,7 @@ public class OpenMicrosoft extends BaseTest {
     void test3() {
         page.navigate("https://microsoft.com");
         page.waitForTimeout(10000);
+        System.out.println("Test completed3");
     }
 
     /*@AfterAll
