@@ -7,7 +7,11 @@ import org.junit.jupiter.api.Test;
 import pages.LoginPage;
 import utils.DBConnections;
 import utils.VehicleQueries;
+import org.junit.jupiter.api.parallel.Execution;
+import org.junit.jupiter.api.parallel.ExecutionMode;
 
+
+@Execution(ExecutionMode.CONCURRENT)
 public class LoginTest extends BaseTest {
 
 
@@ -38,6 +42,19 @@ public class LoginTest extends BaseTest {
         System.out.println("URL: " + page.url());
         System.out.println("TITLE: " + page.title());
         System.out.println("CONTENT: " + page.content());
+        System.out.println(Thread.currentThread().getName());
+    }
+
+    @Test
+    void test2() {
+        page.navigate("https://github.com");
+        page.waitForTimeout(10000);
+    }
+
+    @Test
+    void test3() {
+        page.navigate("https://microsoft.com");
+        page.waitForTimeout(10000);
     }
 
     /*@AfterAll
