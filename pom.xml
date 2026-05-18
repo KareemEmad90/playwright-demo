@@ -44,15 +44,12 @@
         </dependency>
 
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.10.2</version>
-            <scope>test</scope>
+            <groupId>com.oracle.database.jdbc</groupId>
+            <artifactId>ojdbc11</artifactId>
+            <version>23.3.0.23.09</version>
         </dependency>
 
     </dependencies>
-
-
 
     <build>
 
@@ -64,19 +61,20 @@
                 <version>3.2.5</version>
                 <configuration>
                     <useModulePath>false</useModulePath>
+
+                    <includes>
+                        <include>**/*Test.java</include>
+                    </includes>
+
                     <systemPropertyVariables>
                         <allure.results.directory>target/allure-results</allure.results.directory>
                     </systemPropertyVariables>
-
                     <useModulePath>false</useModulePath>
                     <testFailureIgnore>false</testFailureIgnore>
                 </configuration>
-
-
             </plugin>
 
         </plugins>
     </build>
-
 
 </project>
