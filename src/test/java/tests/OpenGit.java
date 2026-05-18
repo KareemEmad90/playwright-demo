@@ -28,6 +28,8 @@ public class OpenGit extends BaseTest {
         page.navigate("https://github.com");
         page.waitForTimeout(10000);
         System.out.println("Test completed2");
+        System.out.println("TITLE: " + page.title());
+
     }
 
 

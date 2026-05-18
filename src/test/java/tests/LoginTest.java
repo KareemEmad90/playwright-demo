@@ -15,8 +15,14 @@ import org.junit.jupiter.api.parallel.ExecutionMode;
 public class LoginTest extends BaseTest {
 
 
-  /*  @BeforeAll
+    @BeforeAll
     static void runDataBaseQueries() {
+
+        if (System.getenv("CI") != null) {
+            System.out.println("Skipping DB in GitHub Actions");
+            return;
+        }
+
         DBConnections.connect();
 
         String result = VehicleQueries.getTrafficId(
@@ -25,7 +31,7 @@ public class LoginTest extends BaseTest {
         );
 
         System.out.println(result);
-    }*/
+    }
 
     @Test
     void loginTest() {
@@ -43,12 +49,13 @@ public class LoginTest extends BaseTest {
         System.out.println("TITLE: " + page.title());
         System.out.println("CONTENT: " + page.content());
         System.out.println(Thread.currentThread().getName());
+        System.out.println("Omarrrrrrrrrrrr");
     }
 
 
 
-    /*@AfterAll
+    @AfterAll
     static void tearDownAll() {
         DBConnections.close();
-    }*/
+    }
 }
