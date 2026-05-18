@@ -48,8 +48,8 @@ public class LoginTest extends BaseTest {
 
 
 
-    /*@AfterAll
+    @AfterAll
     static void tearDownAll() {
         DBConnections.close();
-    }*/
+    }
 }
