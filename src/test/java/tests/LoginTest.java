@@ -30,7 +30,7 @@ public class LoginTest extends BaseTest {
                 "ID"
         );
 
-        System.out.println(result);
+        System.out.println("KAreeeeeeeeeeeeeeeeeeeeeeeeeeeem"+result);
     }
 
     @Test
@@ -49,7 +49,7 @@ public class LoginTest extends BaseTest {
         System.out.println("TITLE: " + page.title());
         System.out.println("CONTENT: " + page.content());
         System.out.println(Thread.currentThread().getName());
-        System.out.println("Omarrrrrrrrrrrr");
+
     }
 
 
