@@ -18,10 +18,6 @@ public class LoginTest extends BaseTest {
     @BeforeAll
     static void runDataBaseQueries() {
 
-        if (System.getenv("CI") != null) {
-            System.out.println("Skipping DB in GitHub Actions");
-            return;
-        }
 
         DBConnections.connect();
 
