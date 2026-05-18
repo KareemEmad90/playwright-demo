@@ -15,7 +15,7 @@ import org.junit.jupiter.api.parallel.ExecutionMode;
 public class LoginTest extends BaseTest {
 
 
-  /*  @BeforeAll
+    @BeforeAll
     static void runDataBaseQueries() {
         DBConnections.connect();
 
@@ -25,7 +25,7 @@ public class LoginTest extends BaseTest {
         );
 
         System.out.println(result);
-    }*/
+    }
 
     @Test
     void loginTest() {
