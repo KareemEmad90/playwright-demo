@@ -21,12 +21,12 @@ public class LoginTest extends BaseTest {
 
         DBConnections.connect();
 
-        String result = VehicleQueries.getTrafficId(
+        /*String result = VehicleQueries.getTrafficId(
                 "SELECT id FROM traffic.tf_stp_traffic_files WHERE traffic_no = '13548788'",
                 "ID"
         );
 
-        System.out.println("KareeeeeeeeeeeeeeeeeeeeeeeeeeeemEmad  "  +result);
+        System.out.println("KareeeeeeeeeeeeeeeeeeeeeeeeeeeemEmad  "  +result);*/
     }
 
     @Test
