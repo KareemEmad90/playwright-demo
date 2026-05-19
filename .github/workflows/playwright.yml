@@ -41,30 +41,36 @@
           if: always()
           run: mvn allure:report
 
-        - name: Upload Allure Report
+        - name: Upload Allure Report Artifact
           if: always()
           uses: actions/upload-artifact@v4
           with:
             name: allure-report
             path: target/site/allure-maven-plugin/
 
+        - name: Upload GitHub Pages Artifact
+          if: always()
+          uses: actions/upload-pages-artifact@v3
+          with:
+            path: target/site/allure-maven-plugin/
+
+        - name: Upload Screenshots
+          if: always()
+          uses: actions/upload-artifact@v4
+          with:
+            name: screenshots
+            path: target/*.png
+
     deploy:
       needs: test
 
       runs-on: ubuntu-latest
 
+      environment:
+        name: github-pages
+        url: ${{ steps.deployment.outputs.page_url }}
+
       steps:
-
-        - name: Download Allure Report
-          uses: actions/download-artifact@v4
-          with:
-            name: allure-report
-            path: allure-report
-
-        - name: Upload GitHub Pages Artifact
-          uses: actions/upload-pages-artifact@v3
-          with:
-            path: allure-report
 
         - name: Deploy to GitHub Pages
           id: deployment
