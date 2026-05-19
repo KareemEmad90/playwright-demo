@@ -5,13 +5,7 @@
       branches:
         - main
 
-  permissions:
-    contents: read
-    pages: write
-    id-token: write
-
   jobs:
-
     test:
       runs-on: self-hosted
 
@@ -38,20 +32,13 @@
           run: mvn clean test
 
         - name: Generate Allure Report
-          if: always()
           run: mvn allure:report
 
-        - name: Upload Allure Report Artifact
+        - name: Upload Allure Report
           if: always()
           uses: actions/upload-artifact@v4
           with:
             name: allure-report
-            path: target/site/allure-maven-plugin/
-
-        - name: Upload GitHub Pages Artifact
-          if: always()
-          uses: actions/upload-pages-artifact@v3
-          with:
             path: target/site/allure-maven-plugin/
 
         - name: Upload Screenshots
@@ -60,18 +47,3 @@
           with:
             name: screenshots
             path: target/*.png
-
-    deploy:
-      needs: test
-
-      runs-on: ubuntu-latest
-
-      environment:
-        name: github-pages
-        url: ${{ steps.deployment.outputs.page_url }}
-
-      steps:
-
-        - name: Deploy to GitHub Pages
-          id: deployment
-          uses: actions/deploy-pages@v4
