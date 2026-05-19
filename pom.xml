@@ -77,9 +77,7 @@
 
                     <testFailureIgnore>false</testFailureIgnore>
 
-                    <includes>
-                        <include>**/*Test.java</include>
-                    </includes>
+
 
                     <systemPropertyVariables>
                         <allure.results.directory>
