@@ -30,9 +30,16 @@
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
             <version>5.10.2</version>
-
+            <scope>test</scope>
         </dependency>
 
+        <!-- JUnit Platform Launcher (required for Surefire test discovery) -->
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-launcher</artifactId>
+            <version>1.10.2</version>
+            <scope>test</scope>
+        </dependency>
 
         <!-- Allure -->
         <dependency>
@@ -75,9 +82,11 @@
                 <configuration>
 
                     <useModulePath>false</useModulePath>
-
                     <testFailureIgnore>false</testFailureIgnore>
 
+                    <includes>
+                        <include>tests/**/*.java</include>
+                    </includes>
 
                     <systemPropertyVariables>
                         <allure.results.directory>

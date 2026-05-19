@@ -1,49 +1,50 @@
-  name: Playwright Tests
+name: Playwright Tests
 
-  on:
-    push:
-      branches:
-        - main
+on:
+  push:
+    branches:
+      - main
 
-  jobs:
-    test:
-      runs-on: self-hosted
+jobs:
+  test:
+    runs-on: self-hosted
 
-      steps:
+    steps:
 
-        - name: Checkout Project
-          uses: actions/checkout@v4
+      - name: Checkout Project
+        uses: actions/checkout@v4
 
-        - name: Setup Java
-          uses: actions/setup-java@v4
-          with:
-            distribution: temurin
-            java-version: 17
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
 
-        - name: Setup Node
-          uses: actions/setup-node@v4
-          with:
-            node-version: 24
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
 
-        - name: Install Playwright Browsers
-          run: mvn exec:java "-Dexec.mainClass=com.microsoft.playwright.CLI" "-Dexec.args=install chromium"
+      - name: Install Playwright Browsers
+        run: mvn exec:java "-Dexec.mainClass=com.microsoft.playwright.CLI" "-Dexec.args=install chromium"
 
-        - name: Run Tests
-          run: mvn clean test
+      - name: Run Tests
+        run: mvn clean test -Dsurefire.failIfNoSpecifiedTests=false
 
-        - name: Generate Allure Report
-          run: mvn allure:report
+      - name: Generate Allure Report
+        if: always()
+        run: mvn allure:report
 
-        - name: Upload Allure Report
-          if: always()
-          uses: actions/upload-artifact@v4
-          with:
-            name: allure-report
-            path: target/site/allure-maven-plugin/
+      - name: Upload Allure Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report
+          path: target/site/allure-maven-plugin/
 
-        - name: Upload Screenshots
-          if: always()
-          uses: actions/upload-artifact@v4
-          with:
-            name: screenshots
-            path: target/*.png
+      - name: Upload Screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: target/*.png
