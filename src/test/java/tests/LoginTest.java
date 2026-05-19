@@ -45,6 +45,7 @@ public class LoginTest extends BaseTest {
         System.out.println("TITLE: " + page.title());
         System.out.println("CONTENT: " + page.content());
         System.out.println(Thread.currentThread().getName());
+        System.out.println("KareeeeeeeeeeeeeeeeeeeeeeeeeeeemEmad  " );
 
     }
 
