@@ -29,7 +29,7 @@ public class OpenGit extends BaseTest {
         page.waitForTimeout(10000);
         System.out.println("Test completed2");
         System.out.println("TITLE: " + page.title());
-        System.out.println("KareeeeeeeeeeeeeeeeeeeeeeeeeeeemEmad222222  " );
+        System.out.println("KareeeeeeeeeeeeeeeeeeeeeeeeeeeemEmad222222XX  " );
 
     }
 
