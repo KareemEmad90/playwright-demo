@@ -84,7 +84,6 @@
                     <useModulePath>false</useModulePath>
                     <testFailureIgnore>false</testFailureIgnore>
 
-                    <!-- Fix: include ALL classes under tests package, not just *Test.java -->
                     <includes>
                         <include>tests/**/*.java</include>
                     </includes>
