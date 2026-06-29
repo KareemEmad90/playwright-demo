@@ -14,18 +14,7 @@ pipeline {
         timeout(time: 30, unit: 'MINUTES')
     }
 
-    environment {
-            // ⚠️ CHANGE THIS to your actual Docker Hub username
-            DOCKER_HUB_USER = 'mba90'
-            IMAGE_NAME      = 'crm-customer'
-            IMAGE_TAG       = "${BUILD_NUMBER}"
-
-            // This matches the ID you just created in the credentials store
-            DOCKER_CREDENTIALS_ID = 'docker-hub-credentials'
-        }
-
     stages {
-
         stage('Build') {
             steps {
                 sh 'mvn clean package -DskipTests -q'
@@ -39,6 +28,10 @@ pipeline {
 
         stage('Test') {
             steps {
+                // 1. Install the host system dependencies required by Playwright browsers
+                sh 'mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.args="install-deps"'
+
+                // 2. Run your tests
                 sh 'mvn test -q'
             }
             post {
