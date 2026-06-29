@@ -3,6 +3,5 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/actions-runner/_work/playwright-demo/playwright-demo" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/../../vls-portal-frontend" vcs="Git" />
   </component>
 </project>
