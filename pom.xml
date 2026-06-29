@@ -78,7 +78,7 @@
                     <useModulePath>false</useModulePath>
 
                     <includes>
-                        <include>**/*Test.java</include>
+                        <include>**/*.java</include>
                     </includes>
 
                     <systemPropertyVariables>

@@ -12,7 +12,4 @@ public class SubmitNewCustomer {
         CRMCustomerApi addNewCustomer = new CRMCustomerApi();
         addNewCustomer.addCustomerInfo();
     }
-
-
-
 }
