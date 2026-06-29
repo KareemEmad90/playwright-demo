@@ -12,6 +12,13 @@ pipeline {
         timeout(time: 30, unit: 'MINUTES')
     }
 
+    environment {
+        DOCKER_HUB_USER = 'mba90'
+        IMAGE_NAME      = 'crm-customer'
+        IMAGE_TAG       = "${BUILD_NUMBER}"
+        DOCKER_CREDENTIALS_ID = 'docker-hub-credentials'
+    }
+
     stages {
         stage('Build') {
             steps {
@@ -25,20 +32,19 @@ pipeline {
         }
 
         stage('Test') {
-            // Tell Jenkins to run ONLY this stage inside the official Playwright container
-            agent {
-                docker {
-                    image 'mcr.microsoft.com/playwright/java:v1.45.0-jammy'
-                    args '-u root --entrypoint='
-                }
-            }
             steps {
-                // No need for install-deps anymore! The image already has them.
-                sh 'mvn test -q'
+                // Spin up the official Playwright container manually, mount the workspace, and run tests
+                sh '''
+                    docker run --rm \
+                    -u root \
+                    -v "${WORKSPACE}":/usr/src/app \
+                    -w /usr/src/app \
+                    mcr.microsoft.com/playwright/java:v1.45.0-jammy \
+                    mvn test -q
+                '''
             }
             post {
                 always {
-                    // This will execute safely back on the agent host
                     junit 'target/surefire-reports/*.xml'
                 }
             }
