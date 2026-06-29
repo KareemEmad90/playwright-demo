@@ -2,6 +2,8 @@ pipeline {
     agent any
 
     tools {
+        // Name must match a JDK 21 installation configured in
+        // Manage Jenkins → Tools → JDK installations
         jdk 'jdk-21'
         maven 'maven-3.9'
     }
@@ -13,17 +15,17 @@ pipeline {
     }
 
     environment {
-        DOCKER_HUB_USER = 'mba90'
-        IMAGE_NAME      = 'crm-customer'
-        IMAGE_TAG       = "${BUILD_NUMBER}"
-        DOCKER_CREDENTIALS_ID = 'docker-hub-credentials'
-        
-        // Tells Playwright to completely skip host dependency verification checks
-        PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD = '0'
-        PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS = 'true'
-    }
+            // ⚠️ CHANGE THIS to your actual Docker Hub username
+            DOCKER_HUB_USER = 'mba90'
+            IMAGE_NAME      = 'crm-customer'
+            IMAGE_TAG       = "${BUILD_NUMBER}"
+
+            // This matches the ID you just created in the credentials store
+            DOCKER_CREDENTIALS_ID = 'docker-hub-credentials'
+        }
 
     stages {
+
         stage('Build') {
             steps {
                 sh 'mvn clean package -DskipTests -q'
@@ -37,7 +39,6 @@ pipeline {
 
         stage('Test') {
             steps {
-                // Run Maven test directly with a fallback/headless argument pattern
                 sh 'mvn test -q'
             }
             post {
