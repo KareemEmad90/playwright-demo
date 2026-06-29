@@ -2,8 +2,6 @@ pipeline {
     agent any
 
     tools {
-        // Name must match a JDK 21 installation configured in
-        // Manage Jenkins → Tools → JDK installations
         jdk 'jdk-21'
         maven 'maven-3.9'
     }
@@ -27,15 +25,20 @@ pipeline {
         }
 
         stage('Test') {
+            // Tell Jenkins to run ONLY this stage inside the official Playwright container
+            agent {
+                docker {
+                    image 'mcr.microsoft.com/playwright/java:v1.45.0-jammy'
+                    args '-u root --entrypoint='
+                }
+            }
             steps {
-                // 1. Install the host system dependencies required by Playwright browsers
-                sh 'mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.args="install-deps"'
-
-                // 2. Run your tests
+                // No need for install-deps anymore! The image already has them.
                 sh 'mvn test -q'
             }
             post {
                 always {
+                    // This will execute safely back on the agent host
                     junit 'target/surefire-reports/*.xml'
                 }
             }
