@@ -18,19 +18,15 @@ public class LoginTest extends BaseTest {
     @BeforeAll
     static void runDataBaseQueries() {
 
-        if (System.getenv("CI") != null) {
-            System.out.println("Skipping DB in GitHub Actions");
-            return;
-        }
 
         DBConnections.connect();
 
-        String result = VehicleQueries.getTrafficId(
+        /*String result = VehicleQueries.getTrafficId(
                 "SELECT id FROM traffic.tf_stp_traffic_files WHERE traffic_no = '13548788'",
                 "ID"
         );
 
-        System.out.println(result);
+        System.out.println("KareeeeeeeeeeeeeeeeeeeeeeeeeeeemEmad  "  +result);*/
     }
 
     @Test
@@ -49,7 +45,8 @@ public class LoginTest extends BaseTest {
         System.out.println("TITLE: " + page.title());
         System.out.println("CONTENT: " + page.content());
         System.out.println(Thread.currentThread().getName());
-        System.out.println("Omarrrrrrrrrrrr");
+        System.out.println("Mohamed Abdelahi " );
+
     }
 
 
