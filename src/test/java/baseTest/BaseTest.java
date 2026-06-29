@@ -5,6 +5,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
 import java.nio.file.Paths;
+import java.util.Arrays;
 
 public class BaseTest {
 
@@ -15,11 +16,13 @@ public class BaseTest {
 
     @BeforeEach
     void setUp() {
+
         playwright = Playwright.create();
 
         browser = playwright.chromium().launch(
                 new BrowserType.LaunchOptions()
-                        .setHeadless(System.getenv("CI") != null)
+                        .setHeadless(true)
+                        .setArgs(Arrays.asList("--no-sandbox", "--disable-setuid-sandbox"))
         );
 
         context = browser.newContext();
