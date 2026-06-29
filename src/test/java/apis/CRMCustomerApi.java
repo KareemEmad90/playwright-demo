@@ -13,7 +13,7 @@ public class CRMCustomerApi {
 
     public Response addCustomerInfo (){
         RestAssured.useRelaxedHTTPSValidation();
-        String baseURI = "http://172.18.125.188:8201/api/customers";
+        String baseURI = "https://coagulant-decibel-equator.ngrok-free.dev/api/customers";
 
 
         String checkEligibilityBody = AddCustomer.SubmitNewCustomerPayLoad(email);
